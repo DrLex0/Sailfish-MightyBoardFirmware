@@ -712,6 +712,7 @@ void restoreDigiPots(void) {
 	}
 }
 
+#ifdef PSTOP_SUPPORT
 static void pstop_incr() {
      if ( !pstop_okay && ++pstop_move_count > 4 ) {
 	  pstop_okay = true;
@@ -720,6 +721,7 @@ static void pstop_incr() {
 #endif
      }
 }
+#endif
 
 // Handle movement comands -- called from a few places
 static void handleMovementCommand(const uint8_t &command) {
