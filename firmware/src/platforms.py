@@ -91,6 +91,13 @@ platforms = {
 #                                       motor driver.)
 #                                       (default: {118,118,40,118,118})
 #
+#        HEATER_CUSTOM_LIMIT         -- Sets Extruder Heater Temperature Limit and HBP Temp Limit
+#                                       {Extruder_max_temp,HBP_max_temp}
+#                                       (default: {280,130}
+#                                       REALY DANGEROUS: You should think more then twice using this
+#                                                        and your bot should be seriously prepared if you rise
+#                                                        Extruder >280 and HBP >130. You are warned now!
+#
 #        PLATFORM_SD_READ_BUFFER     -- Sets size of the SD card read buffer. Tests with an
 #                                       ff_creatorx-2560 show that there seems no benefit to go
 #                                       above the default, but if you're cramming many features in
