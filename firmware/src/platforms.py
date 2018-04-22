@@ -91,6 +91,12 @@ platforms = {
 #                                       motor driver.)
 #                                       (default: {118,118,40,118,118})
 #
+#        PLATFORM_SD_READ_BUFFER     -- Sets size of the SD card read buffer. Tests with an
+#                                       ff_creatorx-2560 show that there seems no benefit to go
+#                                       above the default, but if you're cramming many features in
+#                                       an exotic printer type, maybe it needs to be lowered.
+#                                       (default: 32)
+#
 #   squeeze    -- Source files to compile --mcall-prologues so as to save
 #                 code space.
 
@@ -104,7 +110,7 @@ platforms = {
                         'UtilityScripts.cc', 'RGB_LED.cc',
                         'StandardButtonArray.cc',
   '[ os.path.basename(f) for f in glob.glob(\'../../src/MightyBoard/Motherboard/boards/mighty_one/*.cc\') ]' ],
-          'defines' : [ 'HAS_RGB_LED', 'EEPROM_MENU_ENABLE',
+          'defines' : [ 'HAS_RGB_LED', 'EEPROM_MENU_ENABLE', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish Replicator1\\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Replicator 1\\\"']
           },
@@ -114,7 +120,7 @@ platforms = {
           'programmer' : 'stk500v1',
           'board_directory' : 'mighty_one',
           'defines' : [ 'SINGLE_EXTRUDER', 'BUILD_STATS', 'EEPROM_MENU_ENABLE',
-                        'PLATFORM_HBP_PRESENT=0',
+                        'PLATFORM_HBP_PRESENT=0',  'COOLING_FAN_PWM',
                         'PLATFORM_EXTRUDERS=1',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish Architect\\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Architect\\\"']
@@ -141,7 +147,7 @@ platforms = {
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_one',
           'defines' : [ 'BUILD_STATS', 'ALTERNATE_UART', 'AUTO_LEVEL',
-                        'PSTOP_ZMIN_LEVEL', 'HAS_RGB_LED',
+                        'PSTOP_ZMIN_LEVEL', 'HAS_RGB_LED', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish Replicator1\\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Replicator 1\\\"',
                         'EEPROM_MENU_ENABLE', 'RGB_LED_MENU' ]
@@ -192,7 +198,8 @@ platforms = {
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_one',
           'defines' : [ 'BUILD_STATS', 'ALTERNATE_UART', 'MAX31855',
-                        'AUTO_LEVEL', 'PSTOP_ZMIN_LEVEL', 'HAS_RGB_LED',
+                        'COOLING_FAN_PWM', 'AUTO_LEVEL', 'PSTOP_ZMIN_LEVEL',
+                        'HAS_RGB_LED',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish Replicator1\\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Replicator 1\\\"',
                         'EEPROM_MENU_ENABLE', 'RGB_LED_MENU' ]
@@ -228,7 +235,8 @@ platforms = {
         { 'mcu' : 'atmega1280',
           'programmer' : 'stk500v1',
           'board_directory' : 'mighty_two',
-          'defines' : [ 'CORE_XY', 'SINGLE_EXTRUDER', 'BUILD_STATS', 'HAS_RGB_LED',
+          'defines' : [ 'CORE_XY', 'SINGLE_EXTRUDER', 'BUILD_STATS',
+                        'HAS_RGB_LED', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish Rep2 CoreXY\\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3100',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Rep2 CoreXY\\\"',
@@ -253,6 +261,7 @@ platforms = {
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_two',
           'defines' : [ 'SINGLE_EXTRUDER', 'BUILD_STATS', 'ALTERNATE_UART',
+                        'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish Replicator2\\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3100',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Replicator 2\\\"',
@@ -277,7 +286,7 @@ platforms = {
                         'Thermistor.cc', 'Thermocouple.cc', 'Heater.cc',
                         'CoolingFan.cc', 'PID.cc',
   '[ os.path.basename(f) for f in glob.glob(\'../../src/MightyBoard/Motherboard/boards/mighty_two/*.cc\') ]' ],
-          'defines' : [ 'BUILD_STATS', 'HAS_RGB_LED',
+          'defines' : [ 'BUILD_STATS', 'HAS_RGB_LED', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"  Sailfish Rep 2X   \\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3100',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Replicator 2X\\\"',
@@ -294,7 +303,7 @@ platforms = {
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_two',
           'defines' : [ 'BUILD_STATS', 'ALTERNATE_UART', 'AUTO_LEVEL',
-                        'PSTOP_ZMIN_LEVEL', 'HAS_RGB_LED',
+                        'PSTOP_ZMIN_LEVEL', 'HAS_RGB_LED', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"  Sailfish Rep 2X   \\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3100',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Replicator 2X\\\"',
@@ -314,7 +323,7 @@ platforms = {
                         'LiquidCrystalSerial.cc', 'DigiPots.cc',
                         'Eeprom.cc', 'EepromMap.cc', 'Piezo.cc',
                         'UtilityScripts.cc' ],
-          'defines' : [ 'HEATERS_ON_STEROIDS', 'HAS_RGB_LED',
+          'defines' : [ 'HEATERS_ON_STEROIDS', 'HAS_RGB_LED', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish FF Creator \\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3201',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"FF Creator\\\"',
@@ -325,7 +334,7 @@ platforms = {
         { 'mcu' : 'atmega2560', 
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_one',
-          'defines' : [ 'BUILD_STATS', 'ALTERNATE_UART',
+          'defines' : [ 'BUILD_STATS', 'ALTERNATE_UART', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish FF Creator \\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3201',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"FF Creator\\\"',
@@ -339,6 +348,7 @@ platforms = {
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_one',
           'defines' : [ 'BUILD_STATS', 'ALTERNATE_UART', 'HBP_SOFTPWM',
+                        'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish FF CreatorX\\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3201',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Creator X / Pro\\\"',
@@ -355,7 +365,7 @@ platforms = {
                         'LiquidCrystalSerial.cc','DigiPots.cc',
                         'Eeprom.cc', 'EepromMap.cc', 'Piezo.cc',
                         'UtilityScripts.cc' ],
-          'defines' : [ 'HEATERS_ON_STEROIDS',
+          'defines' : [ 'HEATERS_ON_STEROIDS', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\"Sailfish Wanhao Dup4\\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"Wanhao Duplicatr\\\"',
                         'PLATFORM_TOOLHEAD_OFFSET_X=3201',
@@ -372,7 +382,8 @@ platforms = {
                         'LiquidCrystalSerial.cc','DigiPots.cc',
                         'Eeprom.cc', 'EepromMap.cc', 'Piezo.cc',
                         'UtilityScripts.cc' ],
-          'defines' : [ 'SINGLE_EXTRUDER', 'ZYYX_3D_PRINTER','HEATERS_ON_STEROIDS',
+          'defines' : [ 'SINGLE_EXTRUDER', 'ZYYX_3D_PRINTER',
+                        'HEATERS_ON_STEROIDS', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\" Sailfish ZYYX 3DP  \\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"ZYYX 3D Printer\\\"',
                         'PLATFORM_X_OFFSET_STEPS=11957L',
@@ -388,7 +399,7 @@ platforms = {
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_one',
           'defines' : [ 'EEPROM_MENU_ENABLE', 'BUILD_STATS', 'SINGLE_EXTRUDER',
-                        'ALTERNATE_UART', 'ZYYX_3D_PRINTER',
+                        'ALTERNATE_UART', 'ZYYX_3D_PRINTER', 'COOLING_FAN_PWM',
                         'PLATFORM_SPLASH1_MSG=\\\" Sailfish ZYYX 3DP  \\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"ZYYX 3D Printer\\\"',
                         'PLATFORM_X_OFFSET_STEPS=11957L',
@@ -404,7 +415,7 @@ platforms = {
         { 'mcu' : 'atmega2560',
           'programmer' : 'stk500v2',
           'board_directory' : 'mighty_one',
-          'defines' : [ 'EEPROM_MENU_ENABLE', 'BUILD_STATS',
+          'defines' : [ 'EEPROM_MENU_ENABLE', 'BUILD_STATS', 'COOLING_FAN_PWM',
                         'ALTERNATE_UART', 'ZYYX_3D_PRINTER',
                         'PLATFORM_SPLASH1_MSG=\\\" Sailfish ZYYX 3DP  \\\"',
                         'PLATFORM_THE_REPLICATOR_STR=\\\"ZYYX 3D Printer\\\"',
