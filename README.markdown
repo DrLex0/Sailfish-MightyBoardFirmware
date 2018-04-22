@@ -9,6 +9,19 @@
 		3.1 Advanced building
 	4.0 Credits
 
+**Note**
+
+This branch is intended for making builds that work optimally with the [MightyVariableFan](https://github.com/DrLex0/MightyVariableFan)
+hack that provides advanced fan control on MightyBoard printers. It was branched from
+the master Sailfish branch before the ‘hammerfix’ merges by dbavatar, because those are
+still largely untested and also cause certain hiccups in buzzer playback that could lead
+to fan speed changes being missed (even though I plan to make the detection routine more
+robust against such glitches).
+
+Commits have been cherry-picked into this branch which should be disposable in the long
+run, so don't make any pull requests against this that are supposed to make it into the
+master branch.
+
 **1.0 Introduction**
 
 The Sailfish firmware is an enhanced firmware for Makerbot printers containing
