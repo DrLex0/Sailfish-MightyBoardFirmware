@@ -155,7 +155,7 @@ flags=[
 	'-DVERSION_STR=\'"'+version_str+'"\'',
 	'-DDATE_STR=\'"'+datetime.now().strftime('%y/%m/%d')+'"\'',
 	'-g',
-	'-Os',
+	'-O2',
 	'-Wall',
 	'-Wextra',
 	'-Winline',
